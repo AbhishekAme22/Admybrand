@@ -28,7 +28,7 @@ and using the application.
 
 Installation
 Clone the repository:
-git clone https://github.com/username/project.git
+git clone https://github.com/AbhishekAme22/Admybrand
 
 Change to the project directory:
 cd project
