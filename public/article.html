@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+</head>
+<body>
+    <!-- Button trigger modal -->
+
+  
+  <!-- Modal --><center>
+    <style>
+
+:root { 
+  --blue-maincolor: #00acee;
+  --lightblue-accent-color: #DBF5FF;
+  --darkblue-accent-color: #0092C9;
+  --bg-color: white;
+  --lightgray-accent-color: #DADADA;
+  --main-font: Arial;
+}
+
+body, h1, h2, h3, h4, p {
+  font: var(--main-font);
+}
+
+button { 
+  color: var(--blue-maincolor);
+  background-color: var(--bg-color);
+  font-size: 1rem;
+}
+
+#tweetSection { 
+  border-color: var(--lightgray-accent-color);
+  border-style: solid;
+  margin: 5% auto 5px auto;
+  text-align: center;
+  padding: 20px;
+  width: 600px;
+  position: relative;
+}
+
+.icon-section { 
+  display: inline-block;
+  width: 50px;
+  padding-right: 10px;
+  position: relative;
+}
+
+.text-section { 
+  margin-right: 40p;
+  display: inline-block;
+  width: 520px;
+}
+
+.profile-icon{ 
+  width: 60px;
+  position: absolute;
+  bottom: 140px;
+  right: 15px;
+  border-radius: 50%;
+}
+
+.tweet-btn-visibility {
+  margin-bottom: 15px;
+  padding: 3px 5px;
+  display: block;
+  border-radius: 10px;
+  border-color: var(--lightgray-accent-color);
+  border-style: solid;
+}
+.tweet-btn-visibility img { 
+  width: 10px;
+  padding: 0px 3px 0px 3px;
+  color: var(--blue-maincolor);
+}
+.tweet-btn-visibility:hover { 
+  background-color: var(--lightblue-accent-color);
+}
+
+.tweet-btn-reply {
+  border-radius: 10px;
+  border-style: none;
+  position: relative;
+  right: 180px;
+  margin-top: 10px;
+}
+
+.tweet-btn-reply img { 
+  width: 15px;
+  margin-right: 3px;
+  color: var(--blue-maincolor);
+}
+
+.tweet-btn-reply:hover { 
+  background-color: var(--lightblue-accent-color);
+}
+
+#textbox { 
+  width: 500px;
+  min-height: 200px;
+  border-width: 0px;
+  font-size: 20px;
+  outline: none;
+  display: block;
+  overflow: hidden;
+  display: block;
+  resize: none;
+ /* maxlength: 100px in HTML */ 
+}
+#textbox2 { 
+  width: 500px;
+  min-height: 50px;
+  border-width: 0px;
+  font-size: 20px;
+  outline: none;
+  display: block;
+  overflow: hidden;
+  display: block;
+  resize: none;
+ /* maxlength: 100px in HTML */ 
+}
+
+
+
+.bottom {
+  margin-top: 20px auto 20px auto;
+}
+
+#charCount { 
+  position: relative;
+  left: 75px;
+  font-size: 1.2rem;
+  color: var(--blue-maincolor);
+ 
+}
+
+.tweetButton {
+  padding: 10px 30px 10px 30px;
+  margin-top: 10px;
+  margin-left: 10px;
+  position: relative;
+  left: 75px;
+  color: white;
+  background-color: var(--blue-maincolor);
+  border-style: none;
+  border-radius: 20px;
+}
+
+.tweetButton:hover { 
+ background-color: var(--darkblue-accent-color);
+}
+
+.tweetform-divider { 
+  color: var(--lightgray-accent-color);
+  border-style: solid none none none;
+}
+
+.tweet-icons { 
+ position: relative;
+ right: 85px;
+ top: 10px;
+ height: 25px;
+ padding: 5px;
+}
+
+.tweet-icons:hover { 
+background-color: var(--lightblue-accent-color);
+}
+    </style>
+
+<h3><b><br>WRITE ADVERTISEMENT FOR YOUR BRAND <br>OR<br> GENERATE IT BY OUR AI TOOL</b> </h3></center>
+
+  <form id="tweetSection">
+    
+
+      <div class="text-section">
+       
+        <textarea name="tweet" id="textbox2" placeholder="Title?" maxlength="30" oninput="auto_grow(this)"></textarea>
+        <button type="button"class="tweet-btn-visibility"  id="btnSend" onclick="Send()">
+            Generate Ad Using AI
+          </button>
+      <textarea name="tweet" id="textbox" placeholder="Article?" maxlength="500" oninput="auto_grow(this)"></textarea>
+        
+      
+      
+        <div class="bottom">
+          <hr class="tweetform-divider">
+         
+          <span id="charCount">0/500</span>
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">PREVIEW</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <style>
+        
+
+
+
+
+
+.al_l {
+  text-align: left;
+}
+
+.p_t {
+  padding-top: 15px;
+}
+
+.p_l {
+  padding-left: 15px;
+}
+
+.p_r {
+  padding-right: 15px;
+}
+
+.p_b {
+  padding-bottom: 15px;
+}
+
+.indent {
+  text-indent: 15px;
+}
+
+.b_t {
+  border-top: 2px solid #040404;
+}
+
+.b_r {
+  border-right: 2px solid #040404;
+}
+
+.b_b {
+  border-bottom: 2px solid #040404;
+}
+
+.b_l {
+  border-left: 2px solid #040404;
+}
+
+h1, h2, h3 {
+  margin: 0;
+}
+
+h1 {
+  font-size: 4.25rem;
+  margin: 15px 0;
+  border-bottom: 2px solid #040404;
+}
+
+h2 {
+  font-size: 2.5rem;
+  line-height: 4rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 2.5rem;
+  margin: 0 0 15px;
+}
+
+p {
+  margin: 0;
+}
+
+hr {
+  width: 75%;
+  border: 0;
+  border-bottom: 2px solid #040404;
+  margin: 15px auto;
+}
+
+figure, img {
+  width: 100%;
+  display: block;
+  margin: 0;
+}
+
+.paper {
+  background: #a7a7a7;
+  width: 100%;
+  padding: 15px 15px 0;
+  font-family: "Press Start 2P", cursive;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  overflow: hidden;
+  opacity: 0;
+  -webkit-animation: paper 0s linear forwards;
+          animation: paper 0s linear forwards;
+}
+
+.banner {
+  display: flex;
+  justify-content: space-between;
+  color: #ca0302;
+  border-bottom: 2px solid #040404;
+  margin-bottom: 15px;
+  padding: 7.5px 0;
+}
+
+.heading {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-gap: 15px;
+  border-bottom: 2px solid #040404;
+}
+
+.title {
+  margin: 7.5px 0;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 15px;
+}
+
+.col_3 {
+  grid-column: span 2;
+}
+
+.cols_2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+}
+
+@-webkit-keyframes paper {
+ 
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(1800deg);
+  }
+}
+
+@keyframes paper {
+ 
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(1800deg);
+  }
+}
+                    </style>
+                    <div class="paper">
+                        <div class="banner">
+                          <h2>AD</h2>
+                          <h2>MY</h2>
+                          <h2>BR</h2>
+                          <h2>AND</h2>
+                          <h2>DOT</h2>
+                          <h2>COM</h2>
+                        </div>
+                        <div class="heading">
+                          <h2 class="title_right">Extra!<br>Extra!</h2>
+                          <header class="title_center">
+                            <h1>The Daily Sun</h1>
+                            <h3>The World's Most Purchased Newspaper</h3>
+                          </header>
+                          <h3 class="title_right">Morning<br>Final</h3>
+                        </div>
+                        <h2 class="title">
+                          Paperboy Fired!
+                        </h2>
+                        <div class="body">
+                          <div class="col_1">
+                            <h3 class="al_l p_l">Accused of negligence, vandalism</h3>
+                            <p class="al_l indent">Blahblahbl blahbl blah blahb blahbl bla blahblahb blah blahb blahbl blahbla blahb blahbl bla blahblahb blah blahb blahbl blahbla</p>
+                            <hr />
+                            <h3 class="al_l">Daily sun subscription rate plummets</h3>
+                            <p class="al_l indent">Blahblahbl blahbl blah blahb blahbl</p>
+                          </div>
+                          <div class="col_2">
+                            <figure>
+                              <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1145795/paperboy.jpg" />
+                              <figcaption class="b_r b_b b_l">Blahblahbl blahbl blah</figcaption>
+                            </figure>
+                            <h3 class="al_l p_l">"He was a real loser!"</h3>
+                            <p class="al_l indent">Blahblahbl blahbl</p>
+                          </div>
+                          <div class="col_3 b_t b_r b_l p_t">
+                            <h3>"Worst ever!" claim irate customers</h3>
+                            <div class="cols_2">
+                              <div><p class="al_l p_l indent" id="newsad">Blahblahbl blahbl blah blahb blahbl bla blahblahb blah blahb blahbl blahbla blahblahbl blahbl blah blahb blahbl bla blahblahb blah blahb blahbl blahbla blahblahbl blahbl blah blahb blahbl bla blahblahb blah blahb blahbl blahbla ahbl blahbla blahblahbl blahbl blah blahb blahbl bla blahblahb blah blahb blahbl blahbla blahblahbl blahbl blah blahb blahbl bla blahblahb blah blahb blahbl blahbla</p></div>
+                              <div>
+                                <p class="al_l p_l p_r indent p_b">Blahblahbl blahbl blah blahb blahbl bla blahblahb blah blahb blahbl blahbla blahblahbl</p>
+                                <div class="p_t b_t b_l p_l p_r">
+                                  <h3 class="al_l p_l">Daily Sun now hiring</h3>
+                                  <p class="al_l indent">Blahblahbl blahbl blah blahb blahbl bla blahblahb blah blahb blahbl blahbla blahblahb blah blahb blahbl blahbla blahblahb blah blahb blahbl</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" onclick="createArticle()">Save to Database</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button type="button" onclick="rendernews()" class="btn btn-primary tweetButton" data-toggle="modal" data-target="#exampleModal">
+            View Preview
+          </button>
+        </div>
+        
+      </div>
+      
+    </form>
+  <script>
+    /* check how many characters counter */
+let textArea = document.getElementById("textbox");
+
+let characterCounter = document.getElementById("charCount");
+
+const maxNumOfChars = 500;
+
+const countCharacters = () => { 
+    let numOfEnteredChars = document.getElementById("textbox").value.length; 
+  counter = numOfEnteredChars;
+    characterCounter.textContent = numOfEnteredChars + "/500";
+  
+    if (counter>80) { 
+      characterCounter.style.color="red";
+    } 
+}
+
+textArea.addEventListener("input", countCharacters);
+
+
+/* fix textarea re-size */
+function auto_grow(element) {
+    element.style.height = "5px";
+    element.style.height =                        (element.scrollHeight)+"px";
+}
+
+
+var OPENAI_API_KEY = "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";
+
+
+var OPENAI_API_KEY = "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";
+
+
+
+
+
+
+function Send() {
+
+    var sQuestion = "write Short advertisement intro on "+textbox2.value;
+    if (sQuestion == "") {
+        alert("Type in your question!");
+        textbox2.focus();
+        return;
+    }
+
+    textbox2.innerHTML = "Chat GPT is thinking...";
+
+    var sUrl = "https://api.openai.com/v1/completions";
+    var sModel = "gpt-3.5-turbo";
+    if (sModel.indexOf("gpt-3.5-turbo") != -1) {
+        //https://openai.com/research/gpt-4
+        sUrl = "https://api.openai.com/v1/chat/completions";
+    }
+
+    var oHttp = new XMLHttpRequest();
+    oHttp.open("POST", sUrl);
+    oHttp.setRequestHeader("Accept", "application/json");
+    oHttp.setRequestHeader("Content-Type", "application/json");
+    oHttp.setRequestHeader("Authorization", "Bearer " + OPENAI_API_KEY)
+
+    oHttp.onreadystatechange = function () {
+        if (oHttp.readyState === 4) {
+            //console.log(oHttp.status);
+
+            textArea.innerHTML = "";
+
+            var oJson = {}
+            if (textArea.value != "") textArea.value += "\n";
+
+            try {
+                oJson = JSON.parse(oHttp.responseText);
+            } catch (ex) {
+                textArea.value += "Error: " + ex.message
+            }
+
+            if (oJson.error && oJson.error.message) {
+                textArea.value += "Error: " + oJson.error.message;
+
+            } else if (oJson.choices) {
+                var s = "";
+
+                if (oJson.choices[0].text) {
+                    s = oJson.choices[0].text;
+
+                } else if (oJson.choices[0].message) {
+                    //GPT-4
+                    s = oJson.choices[0].message.content;
+                }
+               
+
+                if (s == "") {
+                    s = "No response";
+                } else {
+                    textArea.value +=s;
+                    TextToSpeech(s);
+                }
+            }
+        }
+    };
+
+    var iMaxTokens = 2048;
+    var sUserId = "1";
+    var dTemperature = 0.5;
+
+    var data = {
+        model: sModel,
+        prompt: sQuestion,
+        max_tokens: iMaxTokens,
+        user: sUserId,
+        temperature: dTemperature,
+        frequency_penalty: 0.0, //Number between -2.0 and 2.0  
+                                //Positive value decrease the model's likelihood 
+                                //to repeat the same line verbatim.
+        presence_penalty: 0.0,  //Number between -2.0 and 2.0. 
+                                //Positive values increase the model's likelihood 
+                                //to talk about new topics.
+        stop: ["#", ";"]        //Up to 4 sequences where the API will stop generating 
+                                //further tokens. The returned text will not contain 
+                                //the stop sequence.
+    }
+
+    //chat GPT-4 gpt-4
+    if (sModel.indexOf("gpt-3.5-turbo") != -1) {
+        data = {
+            "model": sModel,
+            "messages": [
+                //{
+                //    "role": "system",
+                //    "content": "You are a helpful assistant."  
+                //                assistant messages help store prior responses
+                //},
+                {
+                    "role": "user", //system,user,assistant
+                    "content": sQuestion
+                }
+            ]
+        }
+    }
+
+    oHttp.send(JSON.stringify(data));
+
+    if (textArea.value != "") textArea.value += "\n";
+   
+    textbox2.value = "";
+}
+
+function rendernews(){
+    document.getElementById("newsad").innerHTML=document.getElementById("textbox").value
+}
+
+
+
+const baseURL = 'http://localhost:3000';
+
+async function makeRequest(url, method, body, token = '') {
+  const response = await fetch(url, {
+    method,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': token,
+    },
+    body: JSON.stringify(body),
+  });
+
+  const data = await response.json();
+
+  return {
+    status: response.status,
+    data,
+  };
+}
+
+async function createArticle() {
+      const title = document.getElementById('textbox2').value;
+      const description = document.getElementById('textbox').value;
+      const token = localStorage.getItem('token');
+    
+
+      const { status } = await makeRequest(`${baseURL}/articles`, 'POST', { title, description }, token);
+
+      if (status === 200) {
+        alert("Saved to Database")
+        displayResponse(status, 'Article created.');
+        alert("Saved to Database")
+      } else {
+        displayResponse(status, 'Article creation failed.');
+      }
+    }
+
+  </script>
+ 
+ 
+
+  
+</body>
+</html>
